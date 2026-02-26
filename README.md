@@ -144,7 +144,7 @@ npm run build
 - Implementar `TaskList` y `TaskCard` (usar reglas de ordenamiento definidas).
 - Añadir `httpAdapter.ts` plantilla si se quiere preparar backend.
 - Revisar y ejecutar migración si se necesita mover datos de `localStorage` → backend.
-
+> Nota: la configuración inicial del proyecto ya está completada y verificada en esta rama.
 ---
 
 Contacto: equipo de desarrollo — usar este README como contrato de requisitos mínimos para la primera entrega del MVP.
