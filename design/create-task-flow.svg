@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600">
+  <style>
+    .box{fill:#fff;stroke:#333;stroke-width:2;rx:8;}
+    .title{font:700 18px sans-serif;fill:#111}
+    .label{font:400 14px sans-serif;fill:#111}
+    .arrow{stroke:#333;stroke-width:2;fill:none;marker-end:url(#arrowhead)}
+    .bg{fill:#f7f7fb}
+  </style>
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333" />
+    </marker>
+  </defs>
+  <rect width="100%" height="100%" class="bg" />
+
+  <!-- Steps -->
+  <g transform="translate(60,40)">
+    <rect x="0" y="0" width="220" height="60" rx="10" class="box" fill="#E3F2FD"/>
+    <text x="110" y="36" text-anchor="middle" class="title">Abrir app</text>
+
+    <rect x="320" y="0" width="260" height="60" rx="10" class="box" fill="#FFF3E0"/>
+    <text x="450" y="26" text-anchor="middle" class="title">Formulario Nueva Tarea</text>
+    <text x="450" y="46" text-anchor="middle" class="label">Título (req) · Descripción (opc)</text>
+
+    <path d="M240 30 L320 30" class="arrow" />
+
+    <rect x="640" y="0" width="260" height="60" rx="10" class="box" fill="#E8F5E9"/>
+    <text x="770" y="36" text-anchor="middle" class="title">Guardar</text>
+    <text x="770" y="56" text-anchor="middle" class="label">I/C/E = 5 · ICE = 5</text>
+
+    <path d="M580 30 L640 30" class="arrow" />
+
+    <rect x="960" y="0" width="220" height="60" rx="10" class="box" fill="#FFFFFF"/>
+    <text x="1070" y="36" text-anchor="middle" class="title">Tarea creada</text>
+    <text x="1070" y="56" text-anchor="middle" class="label">Persistida en localStorage</text>
+
+    <!-- Secondary flow: validar título -->
+    <rect x="320" y="140" width="260" height="60" rx="10" class="box" fill="#FFEBEE"/>
+    <text x="450" y="176" text-anchor="middle" class="title">Validación</text>
+    <text x="450" y="196" text-anchor="middle" class="label">Título obligatorio · max 100</text>
+
+    <path d="M450 60 L450 140" class="arrow" />
+
+    <path d="M450 200 L450 260" class="arrow" />
+    <rect x="320" y="260" width="260" height="60" rx="10" class="box" fill="#FFF"/>
+    <text x="450" y="296" text-anchor="middle" class="title">Error (si aplica)</text>
+    <text x="450" y="316" text-anchor="middle" class="label">Mostrar mensaje · no guardar</text>
+
+    <!-- Notes -->
+    <text x="0" y="360" class="label">Decisiones:</text>
+    <text x="0" y="380" class="label">- Si título inválido → mostrar error</text>
+    <text x="0" y="400" class="label">- Al guardar → toast y reordenar lista por ICE</text>
+  </g>
+</svg>

@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <style>
+    .phone{fill:#fff;stroke:#bbb;stroke-width:2;rx:16}
+    .header{fill:#1976D2}
+    .title{font:700 16px sans-serif;fill:#111}
+    .label{font:400 13px sans-serif;fill:#444}
+    .chip{font:700 12px sans-serif;fill:#fff}
+    .bg{fill:#fbfcff}
+  </style>
+  <rect width="100%" height="100%" class="bg" />
+
+  <!-- Screen 1: Home / List -->
+  <g transform="translate(60,40)">
+    <rect class="phone" x="0" y="0" width="460" height="820" rx="16"/>
+    <rect x="0" y="0" width="460" height="64" rx="16" class="header" />
+    <text x="20" y="40" fill="#fff" font-weight="700">🧠 Gestor ICE</text>
+
+    <g transform="translate(20,84)">
+      <rect x="0" y="0" width="420" height="60" rx="8" fill="#fff" stroke="#ddd"/>
+      <text x="12" y="36" class="label">Formulario (collapsed) · Título · Añadir</text>
+
+      <g transform="translate(0,80)">
+        <rect x="0" y="0" width="420" height="120" rx="8" fill="#fff" stroke="#ddd"/>
+        <text x="16" y="28" class="title">[ALTA] Implementar login · ICE:100</text>
+        <text x="16" y="52" class="label">En curso · I:10 C:10 E:1</text>
+        <rect x="320" y="12" width="80" height="28" rx="6" fill="#E3F2FD" stroke="#1976D2" />
+        <text x="360" y="32" text-anchor="middle" class="label">✨ IA</text>
+      </g>
+
+      <g transform="translate(0,220)">
+        <rect x="0" y="0" width="420" height="120" rx="8" fill="#fff" stroke="#ddd"/>
+        <text x="16" y="28" class="title">[Media] Crear tests unitarios · ICE:42</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Screen 2: New Task Form -->
+  <g transform="translate(560,40)">
+    <rect class="phone" x="0" y="0" width="460" height="820" rx="16"/>
+    <rect x="0" y="0" width="460" height="64" rx="16" class="header" />
+    <text x="20" y="40" fill="#fff" font-weight="700">Nueva tarea</text>
+
+    <g transform="translate(20,84)">
+      <text x="0" y="24" class="label">Título *</text>
+      <rect x="0" y="28" width="420" height="44" rx="6" fill="#fff" stroke="#ddd"/>
+      <text x="0" y="96" class="label">Descripción (opcional)</text>
+      <rect x="0" y="100" width="420" height="140" rx="6" fill="#fff" stroke="#ddd"/>
+
+      <rect x="0" y="260" width="140" height="40" rx="6" fill="#1976D2" />
+      <text x="70" y="288" text-anchor="middle" fill="#fff" font-weight="700">Añadir tarea</text>
+      <text x="0" y="320" class="label">Al añadir: toast + scroll a la tarjeta</text>
+    </g>
+  </g>
+
+  <!-- Screen 3: Task Card Detail / Edit -->
+  <g transform="translate(1060,40)">
+    <rect class="phone" x="0" y="0" width="460" height="820" rx="16"/>
+    <rect x="0" y="0" width="460" height="64" rx="16" class="header" />
+    <text x="20" y="40" fill="#fff" font-weight="700">Detalle tarea</text>
+
+    <g transform="translate(20,84)">
+      <rect x="0" y="0" width="420" height="180" rx="8" fill="#fff" stroke="#ddd"/>
+      <text x="16" y="28" class="title">Implementar login</text>
+      <text x="16" y="52" class="label">Crear formulario de login y guardar token</text>
+
+      <g transform="translate(12,76)">
+        <text x="0" y="18" class="label">Estado</text>
+        <rect x="0" y="22" width="160" height="36" rx="6" fill="#fff" stroke="#ddd"/>
+
+        <text x="200" y="18" class="label">Impacto</text>
+        <rect x="200" y="22" width="60" height="36" rx="6" fill="#fff" stroke="#ddd"/>
+        <text x="272" y="46" class="label">10</text>
+
+        <text x="340" y="18" class="label">Confianza</text>
+        <rect x="340" y="22" width="60" height="36" rx="6" fill="#fff" stroke="#ddd"/>
+        <text x="412" y="46" class="label">10</text>
+
+        <g transform="translate(0,80)">
+          <rect x="0" y="0" width="420" height="44" rx="6" fill="#fff" stroke="#ddd"/>
+          <text x="12" y="28" class="label">Botones: ✨ Calcular ICE · 🗑 Eliminar</text>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <!-- Footer note -->
+  <text x="20" y="880" class="label">Archivos generados: create-task-flow, navigation-flow, app-screens (SVG + PNG)</text>
+</svg>

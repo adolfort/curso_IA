@@ -1,0 +1,78 @@
+Estructura de carpetas (TypeScript)
+
+src/: código fuente principal.
+src/components/: componentes UI reutilizables (presentational).
+src/features/tasks/: todo lo relacionado con tareas (UI + hooks + types).
+src/features/apiKey/: modal y utilidades para la API key.
+src/components/modals/: ConfirmModal, ApiKeyModal, Toast.
+src/utils/: utilidades puras (ice.ts, storage.ts, gemini.ts).
+src/hooks/: hooks compartidos (useLocalStorage.ts, useToast.ts, useConfirm.ts).
+src/pages/: puntos de entrada visuales si se expande (p. ej. Home.tsx).
+src/theme/: theme.ts y constantes de diseño (colores, spacing).
+src/types/: definiciones TS (task.d.ts o types.ts).
+public/ y index.html: assets estáticos.
+package.json, tsconfig.json, vite.config.ts en raíz.
+División en componentes (alto nivel)
+
+UI primitives (en src/components/):
+
+Button.tsx, TextField.tsx (wrappers MUI si hace falta).
+PriorityBadge.tsx (badge Alta/Media/Baja).
+Layout.tsx (AppBar, Toolbar, responsive Grid).
+Modals (en src/components/modals/):
+
+ConfirmModal.tsx — reuse centralizado, recibe {open,title,message,onConfirm}.
+ApiKeyModal.tsx — primer uso + edición (password input, guardado en localStorage).
+Toast.tsx — Snackbar + Alert (consume estado de toast via hook).
+Feature: Tasks (en src/features/tasks/):
+
+TaskForm.tsx — crear nueva tarea (validaciones, helperText).
+TaskList.tsx — ordena y renderiza TaskCard por reglas (no-hecha → hecha).
+TaskCard.tsx — tarjeta individual: estado, I/C/E inputs, ICE en tiempo real, botones (Calcular IA, Eliminar).
+TaskControls.tsx — pequeños controles compartidos (Estado select, I/C/E inputs).
+TaskService.ts (funciones puras que actualizan arrays: add/update/delete + sort helper).
+tasks.types.ts — Task interface conforme a la especificación.
+Hooks (en src/hooks/):
+
+useTasks.ts — hook principal que expone el array de tareas y mutadores (ver Gestión de estado).
+useLocalStorage.ts — abstracción de localStorage con useEffect y parseo seguro.
+useToast.ts — control centralizado de toasts.
+useConfirm.ts — API para abrir ConfirmModal desde cualquier componente (devuelve confirm() promise-like).
+Gestión del estado (sin librerías externas)
+
+Patrón general: "lifting state" al top-level de la app mediante hooks compuestos. No Redux.
+
+useTasks() (single source of truth):
+
+Mantiene tasks: Task[] en un useState<Task[]>.
+Inicializa con useLocalStorage('tasks') (lazy init).
+Exporta: tasks, addTask, updateTask, deleteTask, recalculateICEForTask, bulkSave, setTasks (para reordenar).
+Cada mutador actualiza estado inmutablemente y llama a saveTasks() (debounce opcional).
+Encapsula reglas de negocio: aplicar calculateICE(), protección cuando effort === 0, aiCalculated flag, y ordenamiento (no-hecha primero por ICE desc, luego hecha por ICE desc).
+useApiKey() (en src/features/apiKey/):
+
+apiKey en estado, setApiKey que persiste en localStorage. Hook lazy-init getApiKey().
+Controla si ApiKeyModal se debe abrir en primer uso (apiKey === '').
+Concurrencia / loading por tarjeta:
+
+En TaskCard local state isLoading para el botón IA (o gestionado por useTasks si quieres centralizar). Mientras isLoading, deshabilitar inputs de esa tarjeta.
+Opcional: useTasks puede exponer loadingIds: Set<string> para bloquear varias tarjetas desde hook central.
+Confirm/Toast globales:
+
+useConfirm() devuelve openConfirm(config) que setea estado en App (confirmModal) y devuelve promise/resolver para el flujo de confirmación.
+useToast() expone showSuccess(msg) y showError(msg) y el Toast consume ese estado global (en App o Provider-like).
+Persistencia y efectos:
+
+useEffect en useTasks o en App que guarda en localStorage cada vez que tasks cambia (usar shallow equality debounce 200–500ms para UX).
+Leer tasks desde localStorage en lazy init: useState(() => getTasks()).
+Tipos y validaciones:
+
+Tipar todo con Task interface. Validaciones runtime mínimas en TaskService (rango 1–10).
+Documentar invariantes: iceScore siempre coherente con I/C/E; aiCalculated controlado por recalculateICEForTask.
+Convenciones y recomendaciones rápidas
+
+Preferir componentes "pequeños y testables": TaskCard compone TaskControls y PriorityBadge.
+Separar lógica de negocio (utils/hooks/services) de la UI. TaskService.calculateAndApply() no depende de React.
+Mantener mutadores en useTasks para evitar prop-drilling largo; pasar handlers a TaskCard como props.
+Manejar errores de Gemini en el hook que llama a gemini.ts y propagar mensajes al useToast. No modificar I/C/E en fallo.
+Documentar en README.md la limitación de guardar apiKey en localStorage.
